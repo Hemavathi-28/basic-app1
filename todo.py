@@ -1,7 +1,10 @@
 import PySimpleGUI as sg
-tasks=[]
+from file_ops import file_write, file_read
+
+tasks=file_read('todolist.txt')
+
 layout = [
-    [sg.InputText(size = (40,1), font=("Arial",16), key='add_item'),
+    [sg.InputText("",size = (40,1), font=("Arial",16), key='add_item'),
      sg.Button("Add",font=("Arial",16), key='add_save')],
     [sg.Listbox(values=tasks, size=(40,10),font=("Arial",16),key='items'),
      sg.Button("Edit",font=("Arial",18),key='edit'),
@@ -37,3 +40,5 @@ while True:
         delete_item()
     elif event == 'edit':
         edit_item()
+
+file_write('todolist.txt',tasks)
